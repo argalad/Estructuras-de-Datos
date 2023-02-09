@@ -4,7 +4,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "../libreria/Complejo.h" // Propios o los de las estructuras de datos de clase
+#include "Complejo.h" // Propios o los de las estructuras de datos de clase
 
 bool esMandelbrot(Complejo const &c, int num_iter) {
     Complejo z = Complejo(0, 0);

@@ -5,7 +5,7 @@
 #include <fstream>
 #include <algorithm>
 
-#include "../libreria/Polinomio.h" // Propios o los de las estructuras de datos de clase
+#include "Polinomio.h" // Propios o los de las estructuras de datos de clase
 
 using namespace std;
 
