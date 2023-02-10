@@ -91,9 +91,12 @@ inline istream& operator>>(istream& in, Horas& h) {
 }
 
 inline ostream& operator<<(ostream& out, Horas& h) {
+    /* out << setfill('0') << setw(2) << h.get_hora() << ":" << setfill('0')
+        << setw(2) << h.get_minutos() << ":" << setfill('0') << setw(2)
+        << h.get_segundos() << endl; */
     out << setfill('0') << setw(2) << h.get_hora() << ":" << setfill('0')
         << setw(2) << h.get_minutos() << ":" << setfill('0') << setw(2)
-        << h.get_segundos() << endl;
+        << h.get_segundos();
 
     return out;
 }

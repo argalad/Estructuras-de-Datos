@@ -16,7 +16,7 @@ class linked_list_ed_plus : public linked_list_ed<T> {
 
    public:
     template <typename Predicate>
-    void mostrarPropiedad(Predicate pred, ostream& o = cout) const {
+    void mostrarPropiedad(Predicate pred, ostream& o = cout) {
         Nodo* aux = this->prim;
         while (aux != nullptr && !pred(aux->elem[0]))
             aux = aux->sig;
