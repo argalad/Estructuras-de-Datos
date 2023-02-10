@@ -21,6 +21,8 @@ class linked_list_ed_plus : public linked_list_ed<T> {
             Nodo* nuevo = new Nodo();
             nuevo->elem = aux->elem;
             nuevo->sig = aux->sig;
+            if (aux->sig == nullptr)
+                this->ult = nuevo;
             aux->sig = nuevo;
             aux = nuevo->sig;
         }
