@@ -1,19 +1,18 @@
 // Nombre y Apellidos: Alberto Rodríguez - Rabadán Manzanares
 // Número de juez: 77
 
-#include <iostream>
-#include <fstream>
-#include <vector>
 #include <algorithm>
+#include <fstream>
+#include <iostream>
+#include <vector>
 
-#include "Horas.h" // Propios o los de las estructuras de datos de clase
+#include "Horas.h"  // Propios o los de las estructuras de datos de clase
 
 using namespace std;
 
 // Resuelve un caso de prueba, leyendo de la entrada la
 // configuración, y escribiendo la respuesta
-bool resuelveCaso()
-{
+bool resuelveCaso() {
     int num_trenes, num_consultas;
 
     // Leer los datos de la entrada
@@ -23,11 +22,11 @@ bool resuelveCaso()
         return false;
 
     vector<Horas> trenes(num_trenes);
-    for(Horas &hora : trenes)
+    for (Horas& hora : trenes)
         cin >> hora;
 
     vector<Horas> consultas(num_consultas);
-    for(Horas &hora : consultas) {
+    for (Horas& hora : consultas) {
         try {
             cin >> hora;
 
@@ -37,8 +36,7 @@ bool resuelveCaso()
                 cout << "NO" << endl;
             else
                 cout << *i;
-        }
-        catch(domain_error &e) {
+        } catch (domain_error& e) {
             cout << e.what() << endl;
         }
     }
@@ -48,8 +46,7 @@ bool resuelveCaso()
     return true;
 }
 
-int main()
-{
+int main() {
     // Ajustes para que cin extraiga directamente de un fichero
 #ifndef DOMJUDGE
     ifstream in("casos.txt");

@@ -1,16 +1,16 @@
 // Nombre y Apellidos: Alberto Rodríguez - Rabadán Manzanares
 // Número de juez: 77
 
-#include <iostream>
 #include <fstream>
+#include <iostream>
 
-#include "Complejo.h" // Propios o los de las estructuras de datos de clase
+#include "Complejo.h"  // Propios o los de las estructuras de datos de clase
 
-bool esMandelbrot(Complejo const &c, int num_iter) {
+bool esMandelbrot(Complejo const& c, int num_iter) {
     Complejo z = Complejo(0, 0);
 
-    while(num_iter > 0 && z.modulo() < 2) {
-        z = z*z + c;
+    while (num_iter > 0 && z.modulo() < 2) {
+        z = z * z + c;
         num_iter--;
     }
 
@@ -24,8 +24,7 @@ using namespace std;
 
 // Resuelve un caso de prueba, leyendo de la entrada la
 // configuración, y escribiendo la respuesta
-void resuelveCaso()
-{
+void resuelveCaso() {
     Complejo c;
     int num_iteraciones;
 
@@ -38,8 +37,7 @@ void resuelveCaso()
         cout << "NO" << endl;
 }
 
-int main()
-{
+int main() {
     // Ajustes para que cin extraiga directamente de un fichero
 #ifndef DOMJUDGE
     ifstream in("casos.txt");

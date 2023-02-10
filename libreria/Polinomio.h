@@ -1,11 +1,11 @@
 // Nombre y Apellidos: Alberto Rodríguez - Rabadán Manzanares
 // Número de juez: 77
-#include <fstream>
-#include <iostream>
-#include <iomanip>
-#include <vector>
-#include <algorithm>
 #include <math.h>
+#include <algorithm>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -13,42 +13,38 @@ using namespace std;
 #define Polinomio_h
 
 class Polinomio {
+   private:
+    vector<pair<int, int>>
+        polinomio;  // first = exponente, second = coeficiente, para ordenarlos
+                    // con sort()
 
-private:
-
-    vector<pair<int, int>> polinomio; // first = exponente, second = coeficiente, para ordenarlos con sort()
-
-public:
-
+   public:
     Polinomio() {}
-    Polinomio(vector<pair<int, int>> const &p) : polinomio(p) {}
+    Polinomio(vector<pair<int, int>> const& p) : polinomio(p) {}
 
-    void insertarMonomio(pair<int, int> const m)
-    {
+    void insertarMonomio(pair<int, int> const m) {
         polinomio.push_back(m);
         sort(polinomio.begin(), polinomio.end());
     }
 
-    long int evaluar(int const &num) const {
+    long int evaluar(int const& num) const {
         long int sol = 0;
 
-        for(pair<int, int> p : polinomio)
+        for (pair<int, int> p : polinomio)
             sol += p.second * pow(num, p.first);
 
         return sol;
     }
-
 };
 
-inline istream& operator>> (istream& in, Polinomio &p) {
-	int coeficiente;
+inline istream& operator>>(istream& in, Polinomio& p) {
+    int coeficiente;
     int exponente;
     Polinomio pol = Polinomio();
 
-	in >> coeficiente >> exponente;
+    in >> coeficiente >> exponente;
     if (in) {
-        while (coeficiente != 0 || exponente != 0)
-        {
+        while (coeficiente != 0 || exponente != 0) {
             pol.insertarMonomio({exponente, coeficiente});
             in >> coeficiente >> exponente;
         }
@@ -56,7 +52,7 @@ inline istream& operator>> (istream& in, Polinomio &p) {
         p = pol;
     }
 
-	return in;
+    return in;
 }
 
 #endif
