@@ -1,51 +1,45 @@
 // Nombre y Apellidos: Alberto Rodríguez - Rabadán Manzanares
 // Número de juez: 77
 
-#include <iostream>
 #include <fstream>
-#include <...>
+#include <iostream>
 
-#include "..." // Propios o los de las estructuras de datos de clase
+#include "..."
 
 using namespace std;
 
-Solucion resolver(Datos datos)
-{
-   ...
+Solucion resolver(Datos datos) {
+    ...
 }
 
 // Resuelve un caso de prueba, leyendo de la entrada la
 // configuración, y escribiendo la respuesta
-bool resuelveCaso()
-{
-   // Leer los datos de la entrada
+bool resuelveCaso() {
+    // Leer los datos de la entrada
 
-   if (!cin) // Fin de la entrada
-      return false;
+    if (!cin)  // Fin de la entrada
+        return false;
 
-   // Resolver problema
-   Solucion sol = resolver(datos);
+    // Resolver problema y mostrar solución
+    Solucion sol = resolver(datos);
 
-   // Escribir sol
-
-   return true;
+    return true;
 }
 
-int main()
-{
-   // Ajustes para que cin extraiga directamente de un fichero
+int main() {
+    // Ajustes para que cin extraiga directamente de un fichero
 #ifndef DOMJUDGE
-   ifstream in("casos.txt");
-   auto cinbuf = cin.rdbuf(in.rdbuf());
+    ifstream in("casos.txt");
+    auto cinbuf = cin.rdbuf(in.rdbuf());
 #endif
 
-   while (resuelveCaso())
-      ;
+    while (resuelveCaso())
+        ;
 
-      // Para dejar todo como estaba al principio
+        // Para dejar todo como estaba al principio
 #ifndef DOMJUDGE
-   cin.rdbuf(cinbuf);
-   system("PAUSE");
+    cin.rdbuf(cinbuf);
+    system("PAUSE");
 #endif
-   return 0;
+    return 0;
 }
