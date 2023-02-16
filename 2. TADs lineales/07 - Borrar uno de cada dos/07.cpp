@@ -29,15 +29,6 @@ class linked_list_ed_plus : public linked_list_ed<T> {
             aux = aux->sig;
         }
     }
-
-    void mostrar(ostream& o = cout) {
-        Nodo* aux = this->prim;
-        while (aux != nullptr) {
-            o << aux->elem << ' ';
-            aux = aux->sig;
-        }
-        o << endl;
-    }
 };
 
 // Resuelve un caso de prueba, leyendo de la entrada la
