@@ -16,22 +16,37 @@ class Polinomio {
    private:
     vector<pair<int, int>>
         polinomio;  // first = exponente, second = coeficiente, para ordenarlos
-                    // con sort()
+                    // con sort(). En los pares se ordena primero por el primer
+                    // elemento y si son iguales, por el segundo
 
    public:
     Polinomio() {}
     Polinomio(vector<pair<int, int>> const& p) : polinomio(p) {}
 
     void insertarMonomio(pair<int, int> const m) {
-        polinomio.push_back(m);
-        sort(polinomio.begin(), polinomio.end());
+        auto pos = lower_bound(polinomio.begin(), polinomio.end(), m);
+        if (pos == polinomio.end())
+            polinomio.push_back(m);
+        else if (pos->first == m.first)
+            pos->second += m.second;
+        else { // Hay que desplazar
+            polinomio.push_back(m);
+            for (int i = polinomio.size() - 1; i > pos->second/* i > *pos */; i--)
+                swap(polinomio[i], polinomio[i - 1]);
+        }
     }
 
-    long int evaluar(int const& num) const {
-        long int sol = 0;
+    long long int evaluar(int const& num) const { // No usar pow
+        long long int sol = 0, pot = 1;
+        int exp_anterior = 0;
 
-        for (pair<int, int> p : polinomio)
-            sol += p.second * pow(num, p.first);
+        for (int i = 0; i < polinomio.size(); i++) {
+            while (exp_anterior < polinomio[i].first) {
+                pot *= num;
+                exp_anterior++;
+            }
+            sol += polinomio[i].second*pot;
+        }
 
         return sol;
     }
@@ -43,7 +58,7 @@ inline istream& operator>>(istream& in, Polinomio& p) {
     Polinomio pol = Polinomio();
 
     in >> coeficiente >> exponente;
-    if (in) {
+    if (in) { // Porque puede fallar la lectura si se acaba la entrada y seguimos leyendo
         while (coeficiente != 0 || exponente != 0) {
             pol.insertarMonomio({exponente, coeficiente});
             in >> coeficiente >> exponente;
