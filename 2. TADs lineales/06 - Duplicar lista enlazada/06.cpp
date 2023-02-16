@@ -17,24 +17,16 @@ class linked_list_ed_plus : public linked_list_ed<T> {
    public:
     void duplicar() {
         Nodo* aux = this->prim;
+        Nodo* nuevo;
         while (aux != nullptr) {
-            Nodo* nuevo = new Nodo();
+            nuevo = new Nodo();
             nuevo->elem = aux->elem;
             nuevo->sig = aux->sig;
-            if (aux->sig == nullptr)
-                this->ult = nuevo;
             aux->sig = nuevo;
             aux = nuevo->sig;
         }
-    }
-
-    void mostrar(ostream& o = cout) {
-        Nodo* aux = this->prim;
-        while (aux != nullptr) {
-            o << aux->elem << ' ';
-            aux = aux->sig;
-        }
-        o << endl;
+        if (aux == nullptr) // Si es el último, se actualiza el puntero ult
+            this->ult = nuevo;
     }
 };
 
