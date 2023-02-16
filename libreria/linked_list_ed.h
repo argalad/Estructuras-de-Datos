@@ -14,6 +14,7 @@
 #ifndef linked_list_ed_h
 #define linked_list_ed_h
 
+#include <iostream>
 #include <stdexcept>  // std::domain_error
 
 template <typename T>
@@ -86,6 +87,16 @@ class linked_list_ed {
 
     // consultar si la lista enlazada está vacía
     bool empty() const { return this->prim == nullptr; }
+
+    // Imprime los elementos de la lista
+    void mostrar(std::ostream& o = std::cout) const {
+        Nodo* aux = this->prim;
+        while (aux != nullptr) {
+            o << aux->elem << ' ';
+            aux = aux->sig;
+        }
+        o << std::endl;
+    }
 
    protected:
     void libera() {
