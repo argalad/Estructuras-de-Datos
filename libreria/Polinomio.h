@@ -31,8 +31,11 @@ class Polinomio {
             pos->second += m.second;
         else { // Hay que desplazar
             polinomio.push_back(m);
-            for (int i = polinomio.size() - 1; i > pos->second/* i > *pos */; i--)
+            int i = polinomio.size() - 1;
+            while (i > 0 && polinomio[i-1].first > m.first) {
                 swap(polinomio[i], polinomio[i - 1]);
+                i--;
+            }
         }
     }
 
