@@ -22,14 +22,11 @@ class double_linked_list_ed_plus : public double_linked_list_ed<T> {
                 aux = aux->sig;
                 aux2 = aux2->sig;
             } else if (aux->elem < aux2->elem) {
-                if (aux->ant == this->fantasma) {
-                    this->fantasma->sig = aux->sig;
-                    aux->sig->ant = this->fantasma;
-                } else {
-                    aux->ant->sig = aux->sig;
-                    aux->sig->ant = aux->ant;
-                }
+                Nodo *a_borrar = aux;
+                aux->sig->ant = aux->ant;
+                aux->ant->sig = aux->sig;
                 aux = aux->sig;
+                delete a_borrar;
             } else {
                 aux2->ant->sig = aux2->sig;
                 aux2->sig->ant = aux2->ant;
@@ -37,9 +34,15 @@ class double_linked_list_ed_plus : public double_linked_list_ed<T> {
             }
         }
 
-        if (aux != this->fantasma) {
-            this->fantasma->ant = aux->ant;
-            aux->ant->sig = this->fantasma;
+        if (aux != this->fantasma) { // Si quedan elementos en la primera lista, se eliminan y se actualiza el fantasma
+            aux2 = aux->ant;
+            while (aux != this->fantasma) {
+                Nodo *a_borrar = aux;
+                aux = aux->sig;
+                delete a_borrar;
+            }
+            this->fantasma->ant = aux2;
+            aux2->sig = this->fantasma;
         }
     }
 
