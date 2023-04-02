@@ -17,8 +17,7 @@ tSol zurdo(bintree<char> arbol) {
         return {0, true};
     else if (arbol.left().empty() && arbol.right().empty()) {
         return {1, true};
-    }
-    else {
+    } else {
         tSol iz = zurdo(arbol.left());
         tSol der = zurdo(arbol.right());
 
