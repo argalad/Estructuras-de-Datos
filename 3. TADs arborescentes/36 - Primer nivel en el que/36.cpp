@@ -1,60 +1,92 @@
-// Nombre y Apellidos: Alberto Rodríguez - Rabadán Manzanares
-// Número de juez: 77
-
 #include <fstream>
 #include <iostream>
 #include "bintree_eda.h"
 
 using namespace std;
 
-struct tSol {
-    int nivel;
-    bool coincide;
-};
-
 template <typename T>
 class bintree_plus : public bintree<T> {
+    using Link = typename bintree<T>::Link;
+
    public:
-    tSol level(const T &valor) {
-        if (left().empty() && right().empty())
-            return {1, false};
+    bintree_plus() : bintree<T>() {}
+    bintree_plus(bintree_plus<T> const& l, T const& e, bintree_plus<T> const& r)
+        : bintree<T>(l, e, r) {}
+
+    pair<int, bool> level(T const& valor) {
+        return find_level(this->raiz, valor);
+    }
+
+   private:
+    vector<int> count_level(Link r, T const& valor, int nivel) {
+        if (r == nullptr)
+            return vector<int>(nivel + 1, 0);
+
+        vector<int> iz_count = count_level(r->left, valor, nivel + 1);
+        vector<int> der_count = count_level(r->right, valor, nivel + 1);
+
+        if (iz_count.size() < der_count.size())
+            iz_count.resize(der_count.size());
+
+        for (int i = 0; i < (int)der_count.size(); ++i)
+            iz_count[i] += der_count[i];
+
+        if (r->elem == valor)
+            iz_count[nivel]++;
+
+        return iz_count;
+    }
+
+    pair<int, bool> find_level(Link r, T const& valor) {
+        vector<int> counts = count_level(r, valor, 1);
+
+        for (int i = 0; i < (int)counts.size(); i++)
+            if (counts[i] >= 2)
+                return {i, true};
+
+        return {0, false};
     }
 };
 
 template <typename T>
 inline bintree_plus<T> leerArbol_plus(T vacio) {
-   T raiz;
-   std::cin >> raiz;
-   if (raiz == vacio) { // es un árbol vacío
-      return {};
-   } else { // leer recursivamente los hijos
-      auto iz = leerArbol_plus(vacio);
-      auto dr = leerArbol_plus(vacio);
-      return {iz, raiz, dr};
-   }
+    T raiz;
+    std::cin >> raiz;
+    if (raiz == vacio)
+        return {};
+    else {
+        auto iz = leerArbol_plus(vacio);
+        auto dr = leerArbol_plus(vacio);
+        return {iz, raiz, dr};
+    }
 }
-// Resuelve un caso de prueba, leyendo de la entrada la
-// configuración, y escribiendo la respuesta
+
 void resuelveCaso() {
     char tipo;
-
-    // Leer los datos de la entrada
     cin >> tipo;
+    pair<int, int> sol;
 
     if (tipo == 'N') {
         int valor;
+        cin >> valor;
         bintree_plus<int> arbol;
         arbol = leerArbol_plus(-1);
+        sol = arbol.level(valor);
     } else {
         char valor;
+        cin >> valor;
         bintree_plus<char> arbol;
         arbol = leerArbol_plus('.');
+        sol = arbol.level(valor);
     }
 
+    if (!sol.second)
+        cout << "NO EXISTE" << endl;
+    else
+        cout << sol.first << endl;
 }
 
 int main() {
-    // Ajustes para que cin extraiga directamente de un fichero
 #ifndef DOMJUDGE
     ifstream in("casos.txt");
     auto cinbuf = cin.rdbuf(in.rdbuf());
@@ -65,7 +97,6 @@ int main() {
     for (int i = 0; i < numCasos; ++i)
         resuelveCaso();
 
-        // Para dejar todo como estaba al principio
 #ifndef DOMJUDGE
     cin.rdbuf(cinbuf);
     system("PAUSE");

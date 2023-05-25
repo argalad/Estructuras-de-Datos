@@ -14,39 +14,35 @@ class linked_list_ed_plus : public linked_list_ed<T> {
 
    public:
     void mezclar(linked_list_ed_plus<T>& lista) {
-        Nodo *aux = this->prim, *aux2 = lista.prim, *aux3 = nullptr;
+        Nodo *aux1 = this->prim, *aux2 = lista.prim, *ant = nullptr;
 
-        while (aux != nullptr && aux2 != nullptr) {
-            if (aux->elem <= aux2->elem) {
-                if (aux->elem + 1 < aux2->elem)
-                    aux = aux->sig;
-                else {
-                    aux3 = aux2->sig;
-                    aux2->sig = aux->sig;
-                    if (aux == this->ult)
-                        this->ult = aux2;
-                    aux->sig = aux2;
-                    aux2 = aux3;
-                    aux = aux->sig->sig;
-                }
+        while (aux1 != nullptr && aux2 != nullptr) {
+            if (aux1->elem <= aux2->elem) {
+                ant = aux1;
+                aux1 = aux1->sig;
             } else {
-                if (aux == this->prim)
+                if (ant != nullptr) {
+                    ant->sig = aux2;
+                } else {
                     this->prim = aux2;
-                aux3 = aux2->sig;
-                aux2->sig = aux;
-                aux2 = aux3;
+                }
+                lista.prim = aux2->sig;
+                aux2->sig = aux1;
+                ant = aux2;
+                aux2 = lista.prim;
             }
         }
+
         if (aux2 != nullptr) {
             if (this->empty()) {
                 this->prim = lista.prim;
                 this->ult = lista.ult;
             } else {
-                aux = this->ult;
-                aux->sig = aux2;
+                this->ult->sig = lista.prim;
                 this->ult = lista.ult;
             }
         }
+
         lista.prim = nullptr;
         lista.ult = nullptr;
     }

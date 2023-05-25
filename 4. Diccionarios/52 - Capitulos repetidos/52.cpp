@@ -1,12 +1,8 @@
 // Nombre y Apellidos: Alberto Rodríguez - Rabadán Manzanares
 // Número de juez: 77
-#include <algorithm>
 #include <fstream>
 #include <iostream>
 #include <unordered_map>
-#include <sstream>
-#include <string>
-#include <vector>
 
 using namespace std;
 

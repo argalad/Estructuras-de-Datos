@@ -18,11 +18,10 @@ bintree<T> buildTree(vector<T>& preorder) {
     auto root = std::make_shared<typename bintree<T>::TreeNode>(nullptr, preorder[0], nullptr);
     std::vector<T> left_subtree, right_subtree;
     for (size_t i = 1; i < preorder.size(); ++i) {
-        if (preorder[i] < preorder[0]) {
+        if (preorder[i] < preorder[0])
             left_subtree.push_back(preorder[i]);
-        } else {
+        else
             right_subtree.push_back(preorder[i]);
-        }
     }
     root->left = buildTree(left_subtree).root;
     root->right = buildTree(right_subtree).root;

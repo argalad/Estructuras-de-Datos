@@ -59,56 +59,39 @@ class linked_list_ed_plus : public linked_list_ed<T> {
     // Separar los elementos positivos y negativos y eliminar los ceros
     //
     void separar(linked_list_ed_plus& l) {
-        Nodo *aux = this->prim, *aux2 = nullptr, *aux3 = nullptr;
+        Nodo *aux = this->prim, *prev = nullptr;
 
-        if (!this->empty()) {
-            while (aux != nullptr) {
-                if (aux->elem == 0) {
-                    Nodo* a_borrar = aux;
-                    if (aux == this->prim) {
-                        this->prim = aux->sig;
-                        aux = aux->sig;
-                    } else {
-                        aux = aux->sig;
-                        if (aux2 != nullptr)
-                            aux2->sig = aux;
-                    }
-                    delete a_borrar;
-                } else if (aux->elem < 0) {
-                    if (aux == this->prim) {
-                        if (l.empty()) {
-                            aux3 = aux;
-                            l.prim = aux3;
-                            l.ult = aux3;
-                            aux = aux->sig;
-                        } else {
-                            aux3->sig = aux;
-                            aux3 = aux3->sig;
-                            aux = aux->sig;
-                            if (aux2 != nullptr)
-                                aux2->sig = aux;
-                        }
-
-                        this->prim = aux;
-                    } else {
-                        aux3->sig = aux;
-                        aux3 = aux3->sig;
-                        aux = aux->sig;
-                        if (aux2 != nullptr)
-                            aux2->sig = aux;
-                    }
-
-                    aux3->sig = nullptr;
-                    l.ult = aux3;
+        while (aux != nullptr) {
+            if (aux->elem == 0) {
+                if (prev == nullptr) {
+                    this->prim = aux->sig;
                 } else {
-                    aux2 = aux;
+                    prev->sig = aux->sig;
+                }
+
+                Nodo* a_borrar = aux;
+                aux = aux->sig;
+                delete a_borrar;
+            } else {
+                if (aux->elem < 0) {
+                    if (prev == nullptr) {
+                        this->prim = aux->sig;
+                    } else {
+                        prev->sig = aux->sig;
+                    }
+
+                    l.push_back(aux->elem);
+                    Nodo* a_borrar = aux;
+                    aux = aux->sig;
+                    delete a_borrar;
+                } else {
+                    prev = aux;
                     aux = aux->sig;
                 }
             }
         }
-        if (aux == nullptr) {
-            this->ult = aux2;
-        }
+
+        this->ult = prev;
     }
 };
 
