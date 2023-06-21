@@ -1,5 +1,3 @@
-// Ejercicio vuelta atras
-#include <iostream>
 #include <iomanip>
 #include <fstream>
 #include <vector>

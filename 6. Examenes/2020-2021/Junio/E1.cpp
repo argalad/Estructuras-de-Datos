@@ -1,5 +1,3 @@
-// Problema interseccion de dos listas ordenadas
-
 // IMPORTANTE
 
 // Nombre y apellidos del alumno

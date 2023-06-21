@@ -1,5 +1,3 @@
-// IMPORTANTE
-
 // Nombre del alumno: Alberto Rodr�guez - Rabad�n Manzanares
 // Usuario del juez que se est� usando en la prueba: A13
 

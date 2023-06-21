@@ -1,6 +1,3 @@
-#include <fstream>
-#include <iostream>
-
 #ifndef queue_eda_h
 #define queue_eda_h
 

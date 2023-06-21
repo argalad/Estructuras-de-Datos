@@ -1,5 +1,3 @@
-// Nombre y Apellidos: Alberto Rodríguez - Rabadán Manzanares
-
 // Comentario general sobre la solución,
 // explicando cómo se resuelve el problema
 

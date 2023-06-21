@@ -1,6 +1,3 @@
-
-// ALBERTO VERDEJO, E93
-
 // las explicaciones se encuentran en el fichero set_modificado.h
 
 

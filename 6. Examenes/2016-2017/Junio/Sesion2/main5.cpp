@@ -1,6 +1,3 @@
-// Isabel Pita. Usuario del examen E72
-// Puesto en el laboratorio 1001
-
 #include <iostream>
 #include <fstream>
 #include <vector>

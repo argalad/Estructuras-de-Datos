@@ -1,6 +1,3 @@
-// Problema iterativo
-// Eliminar de un vector todos los números impares, con coste lineal
-
 #include <iostream>
 #include <iomanip>
 #include <fstream>

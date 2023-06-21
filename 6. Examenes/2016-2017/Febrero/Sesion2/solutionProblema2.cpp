@@ -1,5 +1,3 @@
-// Ejercicio iterativo
-// Se tiene un vector con \emph{k $>$ 0} valores enteros diferentes. Cada valor
 // se encuentra repetido $k_i$ veces, siendo consecutivos todos los valores
 // iguales del vector. Se pide encontrar el número de valores distintos.
 
